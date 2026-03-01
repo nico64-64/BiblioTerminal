@@ -3,19 +3,25 @@ import java.time.LocalTime;
 import java.time.temporal.ChronoUnit; //pour ne pas afficher les millisecondes
 import java.util.Random;
 import java.util.ArrayList;
+import java.util.Scanner;
+import java.util.InputMismatchException;
 
 
 public class Main
 {
 	//---- Ces variables seront fournies par les autres parties ----
-	static String nomEmploye = "Marie";
 	static ArrayList<String> codes = new ArrayList<String>();
 	static ArrayList<String> achats = new ArrayList<String>();
 	static ArrayList<Double> prix = new ArrayList<Double>();
 	//---- ----
 	
 	static int LARGEUR_FACTURE = 35; //ajustez cette valeur pour avoir une facture plus ou moins large
+	static String nomEmploye; //setté par la partie 1, utilisé par la partie 4
 	
+	
+	//|==========|
+	//| Partie 4 |
+	//|==========|
 	
 	static double tps (double montant)
 	//Renvoie la TPS à payer selon le montant fourni.
@@ -114,10 +120,54 @@ public class Main
 	}
 	
 	
+	//|==========|
+	//| PARTIE 1 |
+	//|==========|
+	
+	static void sIdentifier ()
+	{
+		int[] codes = {001, 002, 003, 004, 005};
+		String[] noms = {"Samir", "Kamel", "Nadia", "Jean-Gabriel", "Eve"};
+		boolean trouve = false;
+		Scanner sc = new Scanner(System.in);
+		
+		while (!trouve)
+		{
+			try
+			{
+				System.out.print("Veuillez vous identifier: ");
+				int codeEntre = sc.nextInt();
+				for (int i = 0; i < codes.length; i++)
+				{
+					if (codeEntre == codes[i])
+					{
+						System.out.println("Bonjour, " + noms[i]);
+						trouve = true;
+						nomEmploye = noms[i];
+						break;
+					}
+				}
+				if (!trouve)
+				{System.out.println("ERREUR: Numéro d'employé invalide");}
+			}
+			catch (InputMismatchException e)
+			{
+				System.out.println("Entrée invalide! (Entrez un nombre entier)");
+				sc.next(); //vider l'entrée invalide
+			}
+		}
+		sc.close();
+	}
+	
+	
 	//---- Cette fonction et son contenu va disparaître lorsqu'on mergera les parties ----
 	public static void main (String[] args)
 	{
 		double sousTotal = 0;
+		
+		sIdentifier();
+		
+		System.out.println("\nPARTIES 2 et 3 ICI!\n");
 		
 		codes.add("L1");
 		achats.add("Laptop ASUS");
