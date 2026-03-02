@@ -118,6 +118,297 @@ public class Main
 		afficherSeparateurFacture('=');
 		System.out.println("");
 	}
+
+
+	//|==========|
+	//| PARTIE X |
+	//|==========|
+
+	import java.util.ArrayList;
+
+import java.util.Scanner;
+ 
+public class lab2_partie3 {
+ 
+    public static void main(String[] args) {
+
+        Scanner sc = new Scanner(System.in);
+ 
+ 
+        String[] codes = {"A1", "A2", "B1", "B2", "B3", "L1", "L2", "L3"};
+
+        String[] noms  = {"Crayons", "Cahier Canada", "Table pliante", "Fauteuil en cuir", "Bureau d'etudiant",
+
+                "Laptop ASUS", "Laptop HP", "Laptop Acer"};
+
+        double[] prix  = {3.99, 1.59, 66.99, 199.99, 118.99, 600.89, 700.89, 250.99};
+ 
+ 
+        ArrayList<String> panier = new ArrayList<>();
+ 
+        while (true) {
+
+            System.out.println("\nMENU");
+
+            System.out.println("1. Ajouter un article");
+
+            System.out.println("2. Supprimer un article");
+
+            System.out.println("3. Afficher le panier");
+
+            System.out.println("0. Quitter");
+
+            System.out.print("Choix: ");
+ 
+            int choix;
+
+            if (sc.hasNextInt()) {
+
+                choix = sc.nextInt();
+
+                sc.nextLine();
+
+            } else {
+
+                System.out.println("Choix invalide.");
+
+                sc.nextLine();
+
+                continue;
+
+            }
+ 
+            if (choix == 1) {
+
+                ajouterArticle(sc, panier, codes);
+
+            } else if (choix == 2) {
+
+                supprimerArticle(sc, panier);
+
+            } else if (choix == 3) {
+
+                afficherPanier(panier, codes, noms, prix);
+
+            } else if (choix == 0) {
+
+                break;
+
+            } else {
+
+                System.out.println("Choix invalide.");
+
+            }
+
+        }
+ 
+        sc.close();
+
+    }
+ 
+ 
+    public static void ajouterArticle(Scanner sc, ArrayList<String> panier, String[] codes) {
+
+        System.out.println("\nAJOUT ARTICLE");
+
+        System.out.println("Codes dispo: A1 A2 B1 B2 B3 L1 L2 L3");
+
+        System.out.print("Code: ");
+
+        String code = sc.nextLine().trim();
+ 
+ 
+        boolean existe = false;
+
+        for (int i = 0; i < codes.length; i++) {
+
+            if (codes[i].equalsIgnoreCase(code)) {
+
+                existe = true;
+
+                break;
+
+            }
+
+        }
+ 
+        if (existe) {
+
+            panier.add(code.toUpperCase());
+
+            System.out.println("Ajoute au panier.");
+
+        } else {
+
+            System.out.println("Code invalide.");
+
+        }
+
+    }
+ 
+ 
+    public static void supprimerArticle(Scanner sc, ArrayList<String> panier) {
+
+        System.out.println("\nSUPPRIMER ARTICLE");
+ 
+        if (panier.isEmpty()) {
+
+            System.out.println("Panier vide.");
+
+            return;
+
+        }
+ 
+        System.out.println("Panier: " + panier);
+
+        System.out.print("Code a supprimer: ");
+
+        String code = sc.nextLine().trim();
+ 
+ 
+        boolean retire = false;
+
+        for (int i = 0; i < panier.size(); i++) {
+
+            if (panier.get(i).equalsIgnoreCase(code)) {
+
+                panier.remove(i);
+
+                retire = true;
+
+                break;
+
+            }
+
+        }
+ 
+        if (retire) {
+
+            System.out.println("Article supprime.");
+
+        } else {
+
+            System.out.println("Cet article n'est pas dans le panier.");
+
+        }
+
+    }
+ 
+    public static void afficherPanier(ArrayList<String> panier, String[] codes, String[] noms, double[] prix) {
+
+        System.out.println("\nAFFICHER PANIER");
+ 
+        if (panier.isEmpty()) {
+
+            System.out.println("Panier vide.");
+
+            return;
+
+        }
+ 
+        for (int p = 0; p < panier.size(); p++) {
+
+            String codePanier = panier.get(p);
+ 
+            
+
+            for (int i = 0; i < codes.length; i++) {
+
+                if (codes[i].equalsIgnoreCase(codePanier)) {
+
+                    System.out.println(codes[i] + ": " + noms[i] + " - " + prix[i] + "$");
+
+                    break;
+
+                }
+
+            }
+
+        }
+
+    }
+
+}
+
+
+//|==========|
+//| PARTIE X |
+//|==========|
+
+mport java.util.Scanner;
+ 
+public class Main {
+
+    public static void main(String[] args) {
+
+        Scanner sc = new Scanner(System.in);
+
+        boolean a = true;
+
+        while (a) {
+
+            System.out.println("\n--- Menu principal ---");
+
+            System.out.println("1. Ajouter un article");
+
+            System.out.println("2. Supprimer un article");
+
+            System.out.println("3. Afficher le panier");
+
+            System.out.println("4. Payer");
+ 
+ 
+            System.out.print("Votre choix : ");
+ 
+            int choix = sc.nextInt();
+ 
+            if (choix >= 1 && choix <= 4) {
+
+                switch (choix) {
+
+                    case 1:
+
+                        System.out.println("Ajouter un article");
+
+                        break;
+
+                    case 2:
+
+                        System.out.println("Supprimer un article");
+
+                        break;
+
+                    case 3:
+
+                        System.out.println("Afficher le panier");
+
+                        break;
+
+                    case 4:
+
+                        System.out.println("Payer");
+
+                        break;
+
+                }
+
+                a = false;
+
+                sc.close();
+
+            } else {
+
+                IO.println("veuillez entrer un nombre entre 1 et 4.");
+
+            }
+ 
+        }
+
+}
+ 
+}
+
+ 
 	
 	
 	//|==========|
